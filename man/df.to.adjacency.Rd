@@ -32,10 +32,15 @@ Creates an adjacency matrix from an edge list data.frame.
 Utilizes a script similar to \url{https://observablehq.com/@d3/chord-diagram} adapted to work with r2d3.
 }
 \examples{
-df = data.frame(source = c("a", "a", "b"),
-                target = c("b", "c", "c"),
-                value = c(1, 2, 3))
-                
+labels = c("spam", "eggs", "foo", "bar")
+
+df = data.frame(source = rep(labels, each = 4),
+                target = rep(labels, times = 4),
+                value = c(11975, 5871, 8916, 2868,
+                          1951, 10048, 2060, 6171,
+                          8010, 16145, 8090, 8045,
+                          1013, 990, 940, 6907))
+
 df.to.adjacency(df)
 
 }

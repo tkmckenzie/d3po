@@ -9,7 +9,7 @@ save.d3(
   file,
   width = 1000,
   height = 750,
-  delay = 5,
+  delay = 0.2,
   zoom = 1,
   background = "white",
   title = "D3 Visualization"
@@ -24,6 +24,8 @@ save.d3(
 
 \item{height}{Height of image.}
 
+\item{delay}{Time to wait before taking screenshot, in seconds. Sometimes a longer delay is needed for all assets to display properly.}
+
 \item{zoom}{Zoom before screenshot.}
 
 \item{background}{Background color of diagram.}
@@ -37,6 +39,7 @@ Saves d3 diagram as a png image using webshot.
 data(energy)
 
 d3 = sankey(energy)
-save.d3(d3, "energy.png")
+f = tempfile()
+save.d3(d3, f)
 
 }

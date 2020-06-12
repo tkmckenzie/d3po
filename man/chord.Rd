@@ -9,6 +9,7 @@ chord(
   source.column = "source",
   target.column = "target",
   value.column = "value",
+  edge.color = c("path", "input", "output", "none"),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")
@@ -22,6 +23,8 @@ chord(
 \item{target.column}{Name of column containing target nodes. Defaults to "target".}
 
 \item{value.column}{Name of column containing edge values. Defaults to "value".}
+
+\item{edge.color}{Method of coloring edges. The value "path" will create a gradient between two nodes. Defaults to "path".}
 
 \item{width}{Desired width for output widget.}
 

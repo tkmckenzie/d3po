@@ -35,7 +35,7 @@ sankey <-
     viewer = match.arg(viewer)
     
     # JS file locations
-    package.dir = system.file(package = "r2d3.common")
+    package.dir = system.file(package = "d3po")
     d3.sankey.file = paste0(package.dir, "/js/d3-sankey/d3-sankey.js")
     sankey.script.file = paste0(package.dir, "/js/sankey.js")
     
