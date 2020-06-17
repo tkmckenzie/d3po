@@ -6,10 +6,9 @@ Description: A collection of scripts to create common d3 diagrams using r2d3.
 Maintainer: Taylor McKenzie <tkmckenzie@gmail.com>
 Depends: R (>= 4.0.0)
 Imports: 
+	jsonlite (>= 1.6.1),
     r2d3 (>= 0.2.3),
 	webshot (>= 0.5.2)
-Suggests:
-    ggplot2 (>= 3.1.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

@@ -13,3 +13,9 @@
 #' Taken from \url{https://observablehq.com/@d3/marimekko-chart}.
 #' 
 "sales"
+
+#' Unemployment data
+#' 
+#' Unemployment rate by state, July 2019. Data: Bureau of Labor Statistics.
+#'
+"unemployment" 
