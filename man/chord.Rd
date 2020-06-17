@@ -12,6 +12,7 @@ chord(
   adjacency.matrix = NULL,
   labels = NULL,
   edge.color = c("path", "input", "output", "none"),
+  color.scheme = c("Spectral", color.schemes),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")
@@ -31,6 +32,8 @@ chord(
 \item{labels}{Node names corresponding to rows/columns of adjacency.matrix.}
 
 \item{edge.color}{Method of coloring edges. The value "path" will create a gradient between two nodes. Defaults to "path".}
+
+\item{color.scheme}{Color scheme to use in visualization. See ?d3po::color.schemes for more details.}
 
 \item{width}{Desired width for output widget.}
 

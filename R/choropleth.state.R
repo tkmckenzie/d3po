@@ -7,8 +7,9 @@
 #' @param value.column Name of column containing edge values. Defaults to "value".
 #' @param legend.title Title of legend, e.g., units. Defaults to "".
 #' @param legend.text.size Size of text (in points) for legend. Defaults to 20.
-#' @param color.domain Range of values for the color scale. Defaults to c(min(df[,value.column]), max(df[,value.column])).
+#' @param color.domain Range of values for the color scale. Defaults to c(min(df[,value.column]), max(df[,value.column])). Length greater than two results in a multi-point gradient.
 #' @param num.legend.ticks Number of breaks in legend scale. Defaults to 5.
+#' @param color.scheme Color scheme to use in visualization. See ?d3po::color.schemes for more details.
 #' @param width Desired width for output widget.
 #' @param height Desired height for output widget.
 #' @param viewer "internal" to use the RStudio internal viewer pane for output; "external" to display in an external RStudio window; "browser" to display in an external browser.
@@ -32,10 +33,12 @@ choropleth.state <-
   function(df, state.column = "state", value.column = "value",
            legend.title = "", legend.text.size = 20, scale.text.size = 16,
            color.domain = NULL, num.legend.ticks = 5,
+           color.scheme = c("Blues", color.schemes),
            width = NULL, height = NULL, viewer = c("internal", "external", "browser")){
     # TODO: Deal with NA values in df[,value.column]
     
     # Parsing arguments
+    color.scheme = match.arg(color.scheme)
     viewer = match.arg(viewer)
     
     legend.text.size = as.integer(legend.text.size)
@@ -48,7 +51,7 @@ choropleth.state <-
     if (legend.text.size <= 0) stop("legend.text.size must be greater than 0.")
     if (scale.text.size <= 0) stop("scale.text.size must be greater than 0.")
     if (num.legend.ticks <= 0) stop("num.legend.ticks must be greater than 0.")
-    if (!is.numeric(color.domain) | length(color.domain) != 2) stop("color.domain must be a numeric vector of length 2.")
+    if (!is.numeric(color.domain) | length(color.domain) < 2) stop("color.domain must be a numeric vector of length at least 2.")
     
     # JS file locations
     package.dir = system.file(package = "d3po")
@@ -62,8 +65,9 @@ choropleth.state <-
     preamble = c(sprintf("const title = \"%s\";", legend.title),
                  sprintf("const legendTextSize = %i;", legend.text.size),
                  sprintf("const scaleTextSize = %i;", scale.text.size),
-                 sprintf("const colorDomain = [%g, %g];", color.domain[1], color.domain[2]),
-                 sprintf("const numLegendTicks = %i;", num.legend.ticks))
+                 paste0("const colorDomain = [", paste0(color.domain, collapse = ", "), "];"),
+                 sprintf("const numLegendTicks = %i;", num.legend.ticks),
+                 sprintf("const colorScheme = d3.interpolate%s;", color.scheme))
     
     temp.script.file = tempfile()
     writeLines(c(preamble, choropleth.script), temp.script.file)

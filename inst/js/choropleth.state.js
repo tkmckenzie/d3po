@@ -1,13 +1,13 @@
 // !preview r2d3 data = list(values = unemployment, shape = jsonlite::read_json("map_data/state.json")), dependencies = c("topojson-client/dist/topojson-client.js")
 
-// Variables from R: title, legendTextSize, scaleTextSize, colorDomain, numLegendTicks
+// Variables from R: title, legendTextSize, scaleTextSize, colorDomain, numLegendTicks, colorScheme
 
 // Color domain and range parameters
 const colorDomainMin = Math.min(...colorDomain);
 const colorDomainMax = Math.max(...colorDomain);
 const colorDomainRange = colorDomainMax - colorDomainMin;
 
-const colorRange = [d3.interpolateBlues(0), d3.interpolateBlues(1)];
+const colorRange = colorDomain.map(n => colorScheme((n - colorDomainMin) / colorDomainRange));
 
 // Legend domain parameters
 legendDomain = d3.range(numLegendTicks).map(n => colorDomainMin + n * colorDomainRange / (numLegendTicks - 1));
@@ -62,7 +62,7 @@ svg.append("rect")
   .attr("height", legendHeight)
   .style("fill", "url(#linear-gradient)");
 const xLeg = d3.scaleLinear()
-  .domain(colorDomain)
+  .domain([colorDomainMin, colorDomainMax])
   .range([legendX, legendX + legendWidth - 1]);
 const axisLeg = d3.axisBottom(xLeg)
   .tickValues(legendDomain);

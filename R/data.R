@@ -1,3 +1,9 @@
+#' Compatible D3 color schemes
+#' 
+#' Vector of color schemes available. Most/all d3po functions use d3.interpolate<scheme>.
+#' See \url{https://github.com/d3/d3-scale-chromatic/README.md} for more details on scales.
+"color.schemes"
+
 #' Energy sources and sinks
 #' 
 #' Dataset describing energy generation and consumption
@@ -18,4 +24,4 @@
 #' 
 #' Unemployment rate by state, July 2019. Data: Bureau of Labor Statistics.
 #'
-"unemployment" 
+"unemployment"

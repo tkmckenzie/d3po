@@ -13,6 +13,7 @@ choropleth.state(
   scale.text.size = 16,
   color.domain = NULL,
   num.legend.ticks = 5,
+  color.scheme = c("Blues", color.schemes),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")
@@ -29,9 +30,11 @@ choropleth.state(
 
 \item{legend.text.size}{Size of text (in points) for legend. Defaults to 20.}
 
-\item{color.domain}{Range of values for the color scale. Defaults to c(min(df[,value.column]), max(df[,value.column])).}
+\item{color.domain}{Range of values for the color scale. Defaults to c(min(df[,value.column]), max(df[,value.column])). Length greater than two results in a multi-point gradient.}
 
 \item{num.legend.ticks}{Number of breaks in legend scale. Defaults to 5.}
+
+\item{color.scheme}{Color scheme to use in visualization. See ?d3po::color.schemes for more details.}
 
 \item{width}{Desired width for output widget.}
 
