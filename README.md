@@ -1,3 +1,7 @@
+---
+output: github_document
+---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
@@ -35,8 +39,9 @@ adjacency.matrix = matrix(c(0, 1, 2,
                           nrow = 3, byrow = TRUE)
 
 chord(adjacency.matrix = adjacency.matrix, labels = labels)
-#> Error in chord(adjacency.matrix = adjacency.matrix, labels = labels): could not find function "chord"
 ```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="100%" />
 
 ### Choropleths ###
 
@@ -61,13 +66,17 @@ df.county = us.counties %>%
   mutate(value.county = rnorm(n(), sd = 1)) %>%
   left_join(df.state, by = "state") %>%
   mutate(value = value.state + value.county)
-#> Error in eval(lhs, parent, parent): object 'us.counties' not found
 
 choropleth.state(df.state, value.column = "value.state")
-#> Error in choropleth.state(df.state, value.column = "value.state"): could not find function "choropleth.state"
-choropleth.county(df.county)
-#> Error in choropleth.county(df.county): could not find function "choropleth.county"
 ```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="100%" />
+
+```r
+choropleth.county(df.county)
+```
+
+<img src="man/figures/README-unnamed-chunk-3-2.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="100%" />
 
 ### Word Clouds ###
 Word clouds can be created with `d3po::cloud` by supplying a list of words and relative sizes. Words can also be individually colored or colored by group.
@@ -96,8 +105,9 @@ word.df = word.df %>%
   mutate(value = 3 * value) # To make words a little larger in final image
 
 cloud(word.df, text.color = "word", color.scheme = "RdYlGn")
-#> Error in cloud(word.df, text.color = "word", color.scheme = "RdYlGn"): could not find function "cloud"
 ```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="100%" />
 
 ### Marimekko Charts ###
 Marimekko charts are used to show both proportions amongst groups and total numbers relative to the overall population. These charts are especially useful for comparing similar variables across groups to show how those variables change proportional to both group size and the total population.
@@ -110,8 +120,9 @@ df = data.frame(group = rep(LETTERS[1:num.groups], each = num.vars),
                 var = rep(letters[1:num.vars], times = num.groups),
                 value = runif(num.groups * num.vars, 0, 10))
 marimekko(df, x.column = "group", y.column = "var", color.scheme = "Plasma")
-#> Error in marimekko(df, x.column = "group", y.column = "var", color.scheme = "Plasma"): could not find function "marimekko"
 ```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="100%" />
 
 ### Sankey Diagrams ###
 Sankey diagrams are useful for showing relationships between sets, with strength of relationships represented by size of the link. The function `d3po::sankey` creates a Sankey diagram from an edgelist.
@@ -123,5 +134,6 @@ df = data.frame(source = rep(LETTERS[1:num.sources], each = num.targets),
                 target = rep(letters[1:num.targets], times = num.sources),
                 value = runif(num.groups * num.vars, 0, 10))
 sankey(df)
-#> Error in sankey(df): could not find function "sankey"
 ```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="100%" />
