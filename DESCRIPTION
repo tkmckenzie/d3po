@@ -9,6 +9,13 @@ Imports:
 	jsonlite (>= 1.6.1),
     r2d3 (>= 0.2.3),
 	webshot (>= 0.5.2)
+Suggests:
+	dplyr (>= 1.0.0),
+	knitr (>= 1.20),
+	rcorpora (>= 2.0.0),
+	Rdpack (>= 0.10.1), 
+    rmarkdown (>= 1.10)
+VignetteBuilder: knitr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

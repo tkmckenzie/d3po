@@ -1,20 +1,20 @@
 #' Chord diagram
 #' 
-#' Creates chord diagram from edge data.frame.
+#' Creates chord diagram from edgelist data.frame.
 #' 
-#' @param df data.frame containing edge data.
+#' @param df data.frame containing edgelist data.
 #' @param source.column Name of column containing source nodes. Defaults to "source".
 #' @param target.column Name of column containing target nodes. Defaults to "target".
 #' @param value.column Name of column containing edge values. Defaults to "value".
 #' @param adjacency.matrix Adjancency matrix of edge weights, as an alternative to edge list.
 #' @param labels Node names corresponding to rows/columns of adjacency.matrix.
 #' @param edge.color Method of coloring edges. The value "path" will create a gradient between two nodes. Defaults to "path".
-#' @param color.scheme Color scheme to use in visualization. See ?d3po::color.schemes for more details.
+#' @param color.scheme Color scheme to use in visualization. See \link[d3po]{color.schemes} for more details.
 #' @param width Desired width for output widget.
 #' @param height Desired height for output widget.
 #' @param viewer "internal" to use the RStudio internal viewer pane for output; "external" to display in an external RStudio window; "browser" to display in an external browser.
 #' 
-#' @return A d3 object as returned by r2d3::r2d3.
+#' @return A d3 object as returned by \link[r2d3]{r2d3}.
 #' 
 #' @details
 #' Utilizes a script similar to \url{https://observablehq.com/@d3/chord-diagram} adapted to work with r2d3.
@@ -37,7 +37,7 @@ chord <-
   function(df, source.column = "source", target.column = "target", value.column = "value",
            adjacency.matrix = NULL, labels = NULL,
            edge.color = c("path", "input", "output", "none"),
-           color.scheme = c("Spectral", color.schemes),
+           color.scheme = c("Spectral", d3po::color.schemes),
            width = NULL, height = NULL, viewer = c("internal", "external", "browser")){
     
     # Parsing arguments

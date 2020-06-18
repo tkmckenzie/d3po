@@ -7,12 +7,12 @@
 #' @param value.column Name of column containing edge values. Defaults to "value".
 #' @param group.column Name of column containing group data. Defaults to "group". If group.column is not found in df, a new column with a single group will be created.
 #' @param text.color How to color text; "group" (default) colors by group, "word" colors by word, and "none" colors all words black.
-#' @param color.scheme Color scheme to use in visualization. See ?d3po::color.schemes for more details.
+#' @param color.scheme Color scheme to use in visualization. See \link[d3po]{color.schemes} for more details.
 #' @param width Desired width for output widget.
 #' @param height Desired height for output widget.
 #' @param viewer "internal" to use the RStudio internal viewer pane for output; "external" to display in an external RStudio window; "browser" to display in an external browser.
 #' 
-#' @return A d3 object as returned by r2d3::r2d3.
+#' @return A d3 object as returned by \link[r2d3]{r2d3}.
 #' 
 #' @details
 #' Utilizes a script similar to \url{https://observablehq.com/@d3/word-cloud} adapted to work with r2d3.
@@ -29,7 +29,7 @@
 cloud <-
   function(df, text.column = "text", value.column = "value", group.column = "group",
            text.color = c("group", "word", "none"),
-           color.scheme = c("Spectral", color.schemes),
+           color.scheme = c("Spectral", d3po::color.schemes),
            width = NULL, height = NULL, viewer = c("internal", "external", "browser")){
     
     # Parsing arguments

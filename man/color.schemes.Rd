@@ -3,7 +3,7 @@
 \docType{data}
 \name{color.schemes}
 \alias{color.schemes}
-\title{Compatible D3 color schemes}
+\title{Compatible D3 Color Schemes}
 \format{
 An object of class \code{character} of length 38.
 }
@@ -12,6 +12,6 @@ color.schemes
 }
 \description{
 Vector of color schemes available. Most/all d3po functions use d3.interpolate<scheme>.
-See \url{https://github.com/d3/d3-scale-chromatic/README.md} for more details on scales.
+See \url{https://github.com/d3/d3-scale-chromatic} for more details on scales.
 }
 \keyword{datasets}

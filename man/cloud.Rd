@@ -10,7 +10,7 @@ cloud(
   value.column = "value",
   group.column = "group",
   text.color = c("group", "word", "none"),
-  color.scheme = c("Spectral", color.schemes),
+  color.scheme = c("Spectral", d3po::color.schemes),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")
@@ -27,7 +27,7 @@ cloud(
 
 \item{text.color}{How to color text; "group" (default) colors by group, "word" colors by word, and "none" colors all words black.}
 
-\item{color.scheme}{Color scheme to use in visualization. See ?d3po::color.schemes for more details.}
+\item{color.scheme}{Color scheme to use in visualization. See \link[d3po]{color.schemes} for more details.}
 
 \item{width}{Desired width for output widget.}
 
@@ -36,7 +36,7 @@ cloud(
 \item{viewer}{"internal" to use the RStudio internal viewer pane for output; "external" to display in an external RStudio window; "browser" to display in an external browser.}
 }
 \value{
-A d3 object as returned by r2d3::r2d3.
+A d3 object as returned by \link[r2d3]{r2d3}.
 }
 \description{
 Creates word cloud diagram text and value data.frame.

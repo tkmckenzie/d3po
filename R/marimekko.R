@@ -8,12 +8,12 @@
 #' @param value.column Name of column containing value data. Defaults to "value".
 #' @param min.opacity Minimum opacity value for area colors, between 0 and 1. Defaults to 0.25.
 #' @param max.opacity Maximum opacity value for area colors, between 0 and 1. Defaults to 0.9.
-#' @param color.scheme Color scheme to use in visualization. See ?d3po::color.schemes for more details.
+#' @param color.scheme Color scheme to use in visualization. See \link[d3po]{color.schemes} for more details.
 #' @param width Desired width for output widget.
 #' @param height Desired height for output widget.
 #' @param viewer "internal" to use the RStudio internal viewer pane for output; "external" to display in an external RStudio window; "browser" to display in an external browser.
 #' 
-#' @return A d3 object as returned by r2d3::r2d3.
+#' @return A d3 object as returned by \link[r2d3]{r2d3}.
 #' 
 #' @details
 #' Utilizes a script similar to \url{https://observablehq.com/@d3/marimekko-chart} adapted to work with r2d3.
@@ -28,7 +28,7 @@
 marimekko <-
   function(df, x.column = "x", y.column = "y", value.column = "value",
            min.opacity = 0.25, max.opacity = 0.9,
-           color.scheme = c("Spectral", color.schemes),
+           color.scheme = c("Spectral", d3po::color.schemes),
            width = NULL, height = NULL, viewer = c("internal", "external", "browser")){
     
     # Parsing arguments

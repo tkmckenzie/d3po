@@ -12,14 +12,14 @@ sankey(
   text.align = c("outside", "inside"),
   margin.proportion = 0.2,
   edge.color = c("path", "input", "output", "none"),
-  color.scheme = c("Spectral", color.schemes),
+  color.scheme = c("Spectral", d3po::color.schemes),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")
 )
 }
 \arguments{
-\item{df}{data.frame containing edge data}
+\item{df}{data.frame containing edgelist data.}
 
 \item{source.column}{Name of column containing source nodes. Defaults to "source".}
 
@@ -33,7 +33,7 @@ sankey(
 
 \item{edge.color}{Method of coloring edges. The value "path" will create a gradient between two nodes. Defaults to "path".}
 
-\item{color.scheme}{Color scheme to use in visualization. See ?d3po::color.schemes for more details.}
+\item{color.scheme}{Color scheme to use in visualization. See \link[d3po]{color.schemes} for more details.}
 
 \item{width}{Desired width for output widget.}
 
@@ -42,10 +42,10 @@ sankey(
 \item{viewer}{"internal" to use the RStudio internal viewer pane for output; "external" to display in an external RStudio window; "browser" to display in an external browser.}
 }
 \value{
-A d3 object as returned by r2d3::r2d3.
+A d3 object as returned by \link[r2d3]{r2d3}.
 }
 \description{
-Creates Sankey diagram from edge data.frame.
+Creates Sankey diagram from edgelist data.frame.
 }
 \details{
 Utilizes a script similar to \url{https://observablehq.com/@d3/sankey-diagram} adapted to work with r2d3.

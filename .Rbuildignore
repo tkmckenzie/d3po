@@ -5,3 +5,4 @@
 ^README\.md$
 ^README\.rmd$
 ^cran-comments\.md$
+^README\.Rmd$

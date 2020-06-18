@@ -1,12 +1,14 @@
-#' State level choropleth
+#' County level choropleth
 #' 
-#' Creates choropleth at the U.S. state level.
+#' Creates choropleth at the U.S. county level.
 #' 
-#' @param df data.frame containing value data by state.
-#' @param state.column Name of column containing state names. Defaults to "state". All values in this column must match \code{c(datasets::state.name, "District of Columbia")}.
-#' @param value.column Name of column containing values by state. Defaults to "value".
+#' @param df data.frame containing value data by county.
+#' @param state.column Name of column containing state names. Defaults to "state". All values in this column must match \code{d3po::us.counties$state}.
+#' @param county.column Name of column containing county names. Defaults to "county". All values in this column must match \code{d3po::us.counties$county}.
+#' @param id.column Name of column containing identifiers for states/counties. Defaults to "id". All values in this column must match \code{d3po::us.counties$id}.
+#' @param value.column Name of column containing values by county. Defaults to "value".
 #' @param legend.title Title of legend, e.g., units. Defaults to "".
-#' @param legend.text.size Size of text (in points) for legend. Defaults to 20.
+#' @param legend.text.size Size of text (in points) for legend title. Defaults to 20.
 #' @param scale.text.size Size of text (in points) for the scale values. Defaults to 16.
 #' @param color.domain Range of values for the color scale. Defaults to \code{c(min(df[,value.column]), max(df[,value.column]))}. Length greater than two results in a multi-point gradient.
 #' @param num.legend.ticks Number of breaks in legend scale. Defaults to 5.
@@ -18,20 +20,25 @@
 #' @return A d3 object as returned by \link[r2d3]{r2d3}.
 #' 
 #' @details
-#' Utilizes a script similar to \url{https://observablehq.com/@d3/state-choropleth} adapted to work with r2d3.
+#' Utilizes a script similar to \url{https://observablehq.com/@d3/choropleth} adapted to work with r2d3.
 #' 
 #' @examples
-#' data(unemployment.state)
+#' \dontrun{
+#' data(unemployment.county)
 #' 
-#' choropleth.state(unemployment.state,
-#'                  state.column = "name",
+#' choropleth.county(unemployment.county,
+#'                  state.column = "state",
+#'                  county.column = "county",
+#'                  id.column = "id",
 #'                  value.column = "rate",
 #'                  legend.title = "Unemployment rate (%)")
+#' }
 #' 
 #' @export
 
-choropleth.state <-
-  function(df, state.column = "state", value.column = "value",
+choropleth.county <-
+  function(df, state.column = "state", county.column = "county",
+           id.column = "id", value.column = "value",
            legend.title = "", legend.text.size = 20, scale.text.size = 16,
            color.domain = NULL, num.legend.ticks = 5,
            color.scheme = c("Blues", d3po::color.schemes),
@@ -46,7 +53,7 @@ choropleth.state <-
     scale.text.size = as.integer(scale.text.size)
     num.legend.ticks = as.integer(num.legend.ticks)
     
-    if (is.null(color.domain)) color.domain = c(min(df[,value.column]), max(df[,value.column]))
+    if (is.null(color.domain)) color.domain = c(min(df[,value.column], na.rm = TRUE), max(df[,value.column], na.rm = TRUE))
     
     if (!is.character(legend.title)) stop("legend.title must be a string.")
     if (legend.text.size <= 0) stop("legend.text.size must be greater than 0.")
@@ -57,8 +64,8 @@ choropleth.state <-
     # JS file locations
     package.dir = system.file(package = "d3po")
     topojson.file = paste0(package.dir, "/js/topojson-client/dist/topojson-client.js")
-    shape.file = paste0(package.dir, "/js/map_data/state.json")
-    choropleth.script.file = paste0(package.dir, "/js/choropleth.state.js")
+    shape.file = paste0(package.dir, "/js/map_data/county.json")
+    choropleth.script.file = paste0(package.dir, "/js/choropleth.county.js")
     
     # Copying sankey.js and adding variables in preamble
     choropleth.script = readLines(choropleth.script.file)
@@ -74,8 +81,8 @@ choropleth.state <-
     writeLines(c(preamble, choropleth.script), temp.script.file)
     
     # Selecting source, target, and value columns from df and renaming
-    df = df[,c(state.column, value.column)]
-    names(df) = c("state", "value")
+    df = df[,c(state.column, county.column, id.column, value.column)]
+    names(df) = c("state", "county", "id", "value")
     
     df$value = as.numeric(df$value)
     

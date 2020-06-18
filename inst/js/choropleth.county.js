@@ -16,9 +16,11 @@ legendDomain = d3.range(numLegendTicks).map(n => colorDomainMin + n * colorDomai
 us = data.shape;
 path = d3.geoPath();
 
+const states = new Map(us.objects.states.geometries.map(d => [d.id, d.properties]));
+
 // Value data
-const state_value_zip = data.values.state.map(function(e, i) {return [e, data.values.value[i]];});
-data_map = new Map(state_value_zip);
+const id_value_zip = data.values.id.map(function(e, i) {return [e, data.values.value[i]];});
+data_map = new Map(id_value_zip);
 
 // Scales and formatting
 const color = d3.scaleLinear()
@@ -27,10 +29,10 @@ const color = d3.scaleLinear()
 const format = d => `${d}`;
 
 // Legend position parameters
+const legendX = 1000 - 200 - 150;
+const legendY = 30;
 const legendWidth = 200;
 const legendHeight = 20;
-const legendX = 1000 - legendWidth - 150;
-const legendY = 30;
 
 // Setting viewbox for standardization
 svg.attr("viewBox", [0, 0, 1000, 600]);
@@ -77,12 +79,13 @@ svg
 
 svg.append("g")
   .selectAll("path")
-  .data(topojson.feature(us, us.objects.states).features)
+  .data(topojson.feature(us, us.objects.counties).features)
   .enter().append("path")
-    .attr("fill", d => color(data_map.get(d.properties.name)))
+    .attr("fill", d => color(data_map.get(d.id)))
     .attr("d", path)
   .append("title")
-    .text(d => `${d.properties.name} ${format(data_map.get(d.properties.name))}`);
+    .text(d => `${d.properties.name}, ${states.get(d.id.slice(0, 2)).name}
+${format(data_map.get(d.id))}`);
 
 svg.append("path")
   .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
