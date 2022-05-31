@@ -6,8 +6,6 @@
 \usage{
 choropleth.county(
   df,
-  state.column = "state",
-  county.column = "county",
   id.column = "id",
   value.column = "value",
   legend.title = "",
@@ -15,7 +13,7 @@ choropleth.county(
   scale.text.size = 16,
   color.domain = NULL,
   num.legend.ticks = 5,
-  color.scheme = c("Blues", d3po::color.schemes),
+  color.scheme = c("Blues", names(d3po::color.schemes)),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")
@@ -23,10 +21,6 @@ choropleth.county(
 }
 \arguments{
 \item{df}{data.frame containing value data by county.}
-
-\item{state.column}{Name of column containing state names. Defaults to "state". All values in this column must match \code{d3po::us.counties$state}.}
-
-\item{county.column}{Name of column containing county names. Defaults to "county". All values in this column must match \code{d3po::us.counties$county}.}
 
 \item{id.column}{Name of column containing identifiers for states/counties. Defaults to "id". All values in this column must match \code{d3po::us.counties$id}.}
 
@@ -64,8 +58,6 @@ Utilizes a script similar to \url{https://observablehq.com/@d3/choropleth} adapt
 data(unemployment.county)
 
 choropleth.county(unemployment.county,
-                 state.column = "state",
-                 county.column = "county",
                  id.column = "id",
                  value.column = "rate",
                  legend.title = "Unemployment rate (\%)")

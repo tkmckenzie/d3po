@@ -12,7 +12,7 @@ chord(
   adjacency.matrix = NULL,
   labels = NULL,
   edge.color = c("path", "input", "output", "none"),
-  color.scheme = c("Spectral", d3po::color.schemes),
+  color.scheme = c("Spectral", names(d3po::color.schemes)),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")

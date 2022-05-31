@@ -34,7 +34,7 @@ choropleth.state <-
   function(df, state.column = "state", value.column = "value",
            legend.title = "", legend.text.size = 20, scale.text.size = 16,
            color.domain = NULL, num.legend.ticks = 5,
-           color.scheme = c("Blues", d3po::color.schemes),
+           color.scheme = c("Blues", names(d3po::color.schemes)),
            width = NULL, height = NULL, viewer = c("internal", "external", "browser")){
     # TODO: Deal with NA values in df[,value.column]
     
@@ -58,6 +58,7 @@ choropleth.state <-
     package.dir = system.file(package = "d3po")
     topojson.file = paste0(package.dir, "/js/topojson-client/dist/topojson-client.js")
     shape.file = paste0(package.dir, "/js/map_data/state.json")
+    d3.scale.chromatic.file = paste0(package.dir, "/js/d3-scale-chromatic/d3-scale-chromatic.js")
     choropleth.script.file = paste0(package.dir, "/js/choropleth.state.js")
     
     # Copying sankey.js and adding variables in preamble
@@ -68,7 +69,8 @@ choropleth.state <-
                  sprintf("const scaleTextSize = %i;", scale.text.size),
                  paste0("const colorDomain = [", paste0(color.domain, collapse = ", "), "];"),
                  sprintf("const numLegendTicks = %i;", num.legend.ticks),
-                 sprintf("const colorScheme = d3.interpolate%s;", color.scheme))
+                 sprintf("const colorScheme = d3.interpolate%s;", color.scheme),
+                 sprintf("const divergentColorScheme = %s;", tolower(d3po::color.schemes[[color.scheme]])))
     
     temp.script.file = tempfile()
     writeLines(c(preamble, choropleth.script), temp.script.file)
@@ -85,7 +87,7 @@ choropleth.state <-
     d3 = r2d3::r2d3(
       data = list(values = df, shape = jsonlite::read_json(shape.file)),
       script = temp.script.file,
-      dependencies = topojson.file,
+      dependencies = c(topojson.file, d3.scale.chromatic.file),
       width = width,
       height = height,
       viewer = viewer

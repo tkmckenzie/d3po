@@ -1,8 +1,8 @@
 // Variables from R: title, legendTextSize, scaleTextSize, colorDomain, numLegendTicks, colorScheme, divergentColorScheme
 
 // Color domain and range parameters
-const colorDomainMin = Math.min(...colorDomain);
-const colorDomainMax = Math.max(...colorDomain);
+const colorDomainMin = 0;
+const colorDomainMax = 1;
 const colorDomainRange = colorDomainMax - colorDomainMin;
 
 const colorRange = colorDomain.map(n => colorScheme((n - colorDomainMin) / colorDomainRange));

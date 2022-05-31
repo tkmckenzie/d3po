@@ -37,7 +37,7 @@ chord <-
   function(df, source.column = "source", target.column = "target", value.column = "value",
            adjacency.matrix = NULL, labels = NULL,
            edge.color = c("path", "input", "output", "none"),
-           color.scheme = c("Spectral", d3po::color.schemes),
+           color.scheme = c("Spectral", names(d3po::color.schemes)),
            width = NULL, height = NULL, viewer = c("internal", "external", "browser")){
     
     # Parsing arguments
@@ -61,13 +61,15 @@ chord <-
     
     # JS file locations
     package.dir = system.file(package = "d3po")
+    d3.scale.chromatic.file = paste0(package.dir, "/js/d3-scale-chromatic/d3-scale-chromatic.js")
     chord.script.file = paste0(package.dir, "/js/chord.js")
     
     # Copying sankey.js and adding variables in preamble
     chord.script = readLines(chord.script.file)
     
     preamble = c(sprintf("const edgeColor = \"%s\";", edge.color),
-                 sprintf("const colorScheme = d3.interpolate%s;", color.scheme))
+                 sprintf("const colorScheme = d3.interpolate%s;", color.scheme),
+                 sprintf("const divergentColorScheme = %s;", tolower(d3po::color.schemes[[color.scheme]])))
     
     temp.script.file = tempfile()
     writeLines(c(preamble, chord.script), temp.script.file)
@@ -76,6 +78,7 @@ chord <-
     d3 = r2d3::r2d3(
       data = matrix.labels,
       script = temp.script.file,
+      dependencies = d3.scale.chromatic.file,
       width = width,
       height = height,
       viewer = viewer

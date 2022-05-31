@@ -13,7 +13,7 @@ choropleth.state(
   scale.text.size = 16,
   color.domain = NULL,
   num.legend.ticks = 5,
-  color.scheme = c("Blues", d3po::color.schemes),
+  color.scheme = c("Blues", names(d3po::color.schemes)),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")

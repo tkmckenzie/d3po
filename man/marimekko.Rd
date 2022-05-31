@@ -11,7 +11,7 @@ marimekko(
   value.column = "value",
   min.opacity = 0.25,
   max.opacity = 0.9,
-  color.scheme = c("Spectral", d3po::color.schemes),
+  color.scheme = c("Spectral", names(d3po::color.schemes)),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")

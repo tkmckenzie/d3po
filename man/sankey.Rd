@@ -9,10 +9,11 @@ sankey(
   source.column = "source",
   target.column = "target",
   value.column = "value",
+  sort.nodes = c(TRUE, FALSE),
   text.align = c("outside", "inside"),
   margin.proportion = 0.2,
   edge.color = c("path", "input", "output", "none"),
-  color.scheme = c("Spectral", d3po::color.schemes),
+  color.scheme = c("Spectral", names(d3po::color.schemes)),
   width = NULL,
   height = NULL,
   viewer = c("internal", "external", "browser")
@@ -26,6 +27,8 @@ sankey(
 \item{target.column}{Name of column containing target nodes. Defaults to "target".}
 
 \item{value.column}{Name of column containing edge values. Defaults to "value".}
+
+\item{sort.nodes}{Boolean indicating whether to let sankey.js to sort nodes. Defaults to TRUE. If FALSE, nodes will be ordered as they appear in df.}
 
 \item{text.align}{Alignment of node labels. Defaults to "outside".}
 
